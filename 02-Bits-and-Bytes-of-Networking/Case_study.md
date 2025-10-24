@@ -45,13 +45,27 @@ Wi-Fi speed increased to 90–95 Mbps with stable connection.
 - Performance and speed diagnostics
 
 
-## 🖧 Case Study 3: Network Connectivity Drop — Faulty Ethernet Cable
+## 🌐 Case Study 3: Network Connectivity Drop
 
-**Issue:**  
-A desktop computer on a wired network randomly disconnected multiple times each day.
+### 🧠 Problem:
+A user reported that the **network connection keeps dropping** every few minutes, interrupting file downloads and video calls.
 
-**Diagnosis Steps:**  
-1. Verified that the network adapter was enabled in **Device Manager**.  
-2. Ran continuous ping using:  
+---
+
+### 🔍 Diagnosis:
+- Checked the **network cable and router lights** — both were operational.  
+- Verified that the **network adapter** was functioning but frequently disconnecting.  
+- Ran `ping 8.8.8.8 -t` in Command Prompt — observed **packet loss and timeouts** every few seconds.  
+- Logged into the **router admin panel** to review DHCP logs — found that **IP lease time was only 5 minutes**, causing constant reconnections.
+
+---
+
+### 🧰 Troubleshooting Steps:
+1. Accessed the router via `192.168.0.1`.  
+2. Navigated to **Network Settings → DHCP Configuration**.  
+3. Increased **DHCP lease time** from *5 minutes* to *24 hours*.  
+4. Rebooted the router and renewed IP using:  
    ```bash
-   ping -t 8.8.8.8
+   ipconfig /release
+   ipconfig /renew
+5.Monitered connectivity for 30 minutes-no connectivity drop
